@@ -1,0 +1,48 @@
+﻿
+@model List<cadastro.Models.AulaModel>
+
+
+<div class="video-page">
+    <div class="main-video">
+        <!-- Aula do Dia -->
+        @foreach (var aula in Model.Where(a => a.DataProgramada.Date == DateTime.Now.Date).OrderBy(a => a.DataProgramada))
+        {
+            <h2>@aula.Nome - Aula de Hoje!</h2>
+            <p>@aula.Descricao</p>
+
+            <p>Data programada: @aula.DataProgramada.ToString("dd/MM/yyyy")</p>
+
+            <div class="video-container">
+                <iframe width="560" height="315"
+                        src="https://www.youtube.com/embed/@aula.ExtractYouTubeVideoId()"
+                        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                </iframe>
+            </div>
+        }
+    </div>
+
+    <!-- Sidebar com miniaturas das aulas futuras abaixo do vídeo -->
+    <div class="sidebar">
+        <h3>Aulas Futuras</h3>
+        @foreach (var aula in Model.Where(a => a.DataProgramada.Date > DateTime.Now.Date)
+        .OrderBy(a => a.DataProgramada)
+        .Take(6))
+        {
+            <div class="thumbnail">
+                @if (aula.CapaUrl != null)
+                {
+                    <img src="/imagem/@aula.CapaUrl" style="width: 100px; height: 100px; object-fit: cover;" />
+                }
+                else
+                {
+                    <p>Sem capa disponível</p>
+                }
+                <p>Disponível em: @aula.DataProgramada.ToString("dd/MM/yyyy")</p>
+            </div>
+        }
+    </div>
+</div>
+
+
+

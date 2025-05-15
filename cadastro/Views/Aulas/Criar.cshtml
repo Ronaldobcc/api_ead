@@ -1,0 +1,65 @@
+﻿@using cadastro.Dtos.AulasDto
+
+@model CriarAulaDto
+﻿
+@{
+    ViewData["Title"] = "Listagem de Aulas";
+}
+
+
+
+<br />
+
+@if (TempData["MensagemSucesso"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert" aria-label="Close">X</button>
+        @TempData["MensagemSucesso"]
+    </div>
+}
+
+@if (TempData["MensagemErro"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert" aria-label="Close">X</button>
+        @TempData["MensagemErro"]
+    </div>
+}
+
+<br />
+
+<h1 class="display-4">Criar  Aulas</h1>
+
+
+<form method="post" asp-action="Criar" asp-controller="Aulas" enctype="multipart/form-data">
+    
+    <div>
+        <label for="Nome" class="label-branco">Nome da Aula</label>
+        <input type="text" id="nome" name="Nome" class="form-control" required>
+    </div>
+
+    <div>
+        <label for="Descricao" class="label-branco">Descrição da Aula</label>
+        <textarea id="descricao" name="Descricao" class="form-control" required></textarea>
+    </div>
+
+    <div>
+        <label for="VideoUrl" class="label-branco">URL do Vídeo</label>
+        <input type="url" id="videoUrl" name="VideoUrl" class="form-control" required>
+    </div>
+
+    <div>
+        <label for="dataProgramada" class="label-branco">Data Programada</label>
+        <input type="date" id="dataProgramada" name="DataProgramada" class="form-control" required>
+    </div>
+
+    <div>
+        <label for="Capa" class="label-branco">Capa da Aula</label>
+        <input type="file" id="capa" name="foto" class="form-control" accept="img/*" required>
+    </div>
+
+    <div class="d-flex mt-5 g-2">
+        <button type="submit" class="btn btn-success w-50 mx-2">Adicionar</button>
+        <a class="btn btn-info w-50" asp-controller="Aulas" asp-action="ListaAulas">Voltar</a>
+    </div>
+    </form> 

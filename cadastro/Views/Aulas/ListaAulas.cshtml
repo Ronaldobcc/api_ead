@@ -1,0 +1,83 @@
+﻿﻿@using cadastro.ViewComponents
+
+@model List<cadastro.Models.AulaModel>
+
+
+@{
+    ViewData["Title"] = "Listagem de Aulas";
+}
+
+<div class="text-center">
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+        <a class="btn btn-primary" asp-controller="Aulas" asp-action="Criar" role="button">Adicionar nova aula</a>
+    </div>
+
+    <br />
+
+    @if (TempData["MensagemSucesso"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert" aria-label="Close">X</button>
+            @TempData["MensagemSucesso"]
+        </div>
+    }
+
+    @if (TempData["MensagemErro"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert" aria-label="Close">X</button>
+            @TempData["MensagemErro"]
+        </div>
+    }
+
+    <br />
+
+    <h1 class="display-4">Listagem de Aulas</h1>
+
+    <table id="table-aulas" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Data Programada</th>
+                <th scope="col">Capa</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach (var aula in Model)
+                {
+                    <tr>
+                        <th scope="row">@aula.Id</th>
+                        <td>@aula.Nome</td>
+                        <td>@aula.DataProgramada.ToString("dd/MM/yyyy")</td>
+                        <td>
+                            @if (aula.CapaUrl != null)
+                            {
+                              
+                                <img src="/imagem/@aula.CapaUrl" style="width: 30px; height: 30px" />
+                            }
+                            else
+                            {
+                                <p>Sem capa</p>
+                            }
+                        </td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a role="button" asp-action="Editar" asp-controller="Aulas" asp-route-id="@aula.Id" class="btn btn-primary">Editar</a>
+                                <a role="button" asp-action="Remover" asp-controller="Aulas" asp-route-id="@aula.Id" class="btn btn-danger">Apagar</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr class="odd"><td valign="top" colspan="7">Nenhuma aula encontrada</td></tr>
+            }
+        </tbody>
+    </table>
+</div>

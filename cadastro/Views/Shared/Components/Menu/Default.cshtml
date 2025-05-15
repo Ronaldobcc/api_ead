@@ -1,0 +1,77 @@
+﻿
+@model UsuarioModel
+
+
+
+
+  <div class="interface">
+    <div class="logo">
+        <a href="index.html">
+            <img src="imagem/logoeadf.png" alt="logo funcidance">
+        </a>
+
+
+    </div><!--logo-->
+
+    <nav class="menu-desktop">
+        <ul>
+            <li><a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Página Inicial</a></li>
+            <li><a class="navbar-brand" asp-area="" asp-controller="Aulas" asp-action="Index">Aulas</a></li>
+            <li><a class="navbar-brand" asp-area="" asp-controller="AlterarSenha" asp-action="Index">Alterar Senha</a></li>
+            <li><a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Olá, @Model.Nome</a></li>
+            
+
+
+            @if (Model.Perfil == cadastro.Enums.PerfilEnum.Admin)
+            {
+                <li class="nav-item">
+                    <a class="navbar-brand" asp-area="" asp-controller="Usuario" asp-action="Index">Usuários</a>
+                    <a class="navbar-brand" asp-area="" asp-controller="Contato" asp-action="Index">Contatos</a>
+                    <a class="navbar-brand" asp-area="" asp-controller="Aulas" asp-action="ListaAulas">Lista de Aulas</a>
+                </li>
+               
+            }
+            <li><a class="navbar-brand" asp-area="" asp-controller="Login" asp-action="Sair">Sair</a></li>
+
+        </ul>
+    </nav>
+
+
+
+   
+    <div class="btn-abrir-menu" id="btn-menu">
+        <i class="bi bi-list"></i>
+    </div>
+
+    <div class="menu-mobile" id="menu-mobile">
+        <div class="btn-fechar">
+            <i class="bi bi-x-lg"></i>
+
+        </div>
+
+
+        <nav>
+            <ul>
+                <li><a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Página Inicial</a></li>
+                <li><a class="navbar-brand" asp-area="" asp-controller="Aulas" asp-action="Index">Aulas</a></li>
+                <li><a class="navbar-brand" asp-area="" asp-controller="AlterarSenha" asp-action="Index">Alterar Senha</a></li>
+                <li><a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Olá, @Model.Nome</a></li>
+                <li><a class="navbar-brand" asp-area="" asp-controller="Login" asp-action="Sair">Sair</a></li>
+                <li><a href="https://wa.me/5511959456633">Contato</a></li>
+
+                @if (Model.Perfil == cadastro.Enums.PerfilEnum.Admin)
+                {
+                    <li class="nav-item">
+                        <a class="navbar-brand" asp-area="" asp-controller="Usuario" asp-action="Index">Usuários</a>
+                        <a class="navbar-brand" asp-area="" asp-controller="Aulas" asp-action="Criar">Criar Aula</a>
+                        <a class="navbar-brand" asp-area="" asp-controller="Contato" asp-action="Index">Contatos</a>
+                        <a class="navbar-brand" asp-area="" asp-controller="Aulas" asp-action="ListaAulas">Lista de Aulas</a>
+                    </li>
+                }
+
+            </ul>
+        </nav>
+
+    </div><!--menu-mobile-->
+    <div class="overlay-menu" id="overlay-menu"></div>
+</div><!--interface-->
